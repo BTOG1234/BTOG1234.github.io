@@ -2,5 +2,11 @@
 #amog {
     width: 150px;
     height: 198px;
+    background-image: url('idle.gif');
+    background-size: cover;
     margin: 50px auto; /* Center horizontally */
+}
+
+#amog.hungry {
+    background-image: url('hungry.gif');
 }
