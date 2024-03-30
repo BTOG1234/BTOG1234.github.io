@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Instructions</title>
+    <link rel="stylesheet" type="text/css" href="styles.css">
+    <style>
+        /* CSS for dark mode */
+        body.dark-mode {
+            background-color: #333;
+            color: #f2f2f2;
+        }
+    </style>
+</head>
+<body>
+    <h1>Instructions</h1>
+    <main id="instructions-content">
+        <h2>Welcome to Amog Game!</h2>
+        <p>In this game, your goal is to take care of your creature called "Amog".</p>
+        <p>You need to:</p>
+        <ul>
+            <li>Feed Amog regularly.</li>
+            <li>Play with Amog to keep it entertained.</li>
+            <li>Ensure Amog gets enough rest.</li>
+            <!-- Add more instructions as needed -->
+        </ul>
+    </main>
+    <button class="button" onclick="goToMainMenu()" aria-label='Back to Main Menu Button'>Back to Main Menu</button>
+
+    <script>
+        function goToMainMenu() {
+            window.location.href = "index.html";
+        }
+
+        // Check dark mode preference on page load
+        window.onload = function() {
+            const darkMode = localStorage.getItem('darkMode');
+            if (darkMode === 'enabled') {
+                document.documentElement.setAttribute('data-theme', 'dark');
+                document.body.classList.add('dark-mode');
+            }
+        };
+    </script>
+</body>
+</html>

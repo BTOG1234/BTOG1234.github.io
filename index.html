@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en" id="html">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Amog Game</title>
+    <link rel="stylesheet" type="text/css" href="styles.css">
+    <style>
+        body.light-mode {
+            background-color: #f2f2f2;
+            color: #333;
+            transition: background-color 0.5s, color 0.5s;
+        }
+
+        body.dark-mode {
+            background-color: #333;
+            color: #f2f2f2;
+        }
+
+        .switch-label {
+            font-size: 14px;
+            margin-top: 5px;
+        }
+    </style>
+</head>
+<body class="light-mode">
+    <h1>Welcome to Amog Game</h1>
+    <div id="menu" role="menu">
+        <button class="button" onclick="startGame()" aria-label="Start Game Button" role="menuitem">Start Game</button>
+        <button class="button" onclick="showInstructions()" aria-label="Instructions Button" role="menuitem">Instructions</button>
+        <button class="button" onclick="showCredits()" aria-label="Credits Button" role="menuitem">Credits</button>
+        <label class="switch" id="darkModeToggle">
+            <input type="checkbox" id="toggle">
+            <span class="slider round"></span>
+        </label>
+        <span class="switch-label">Dark Mode</span>
+    </div>
+
+    <script>
+        const toggleSwitch = document.querySelector('#toggle');
+
+        toggleSwitch.addEventListener('change', switchTheme, false);
+
+        function switchTheme(e) {
+            if (e.target.checked) {
+                document.documentElement.setAttribute('data-theme', 'dark');
+                document.body.classList.add('dark-mode');
+                localStorage.setItem('darkMode', 'enabled'); // Save dark mode preference to local storage
+            } else {
+                document.documentElement.setAttribute('data-theme', 'light');
+                document.body.classList.remove('dark-mode');
+                localStorage.setItem('darkMode', 'disabled'); // Save light mode preference to local storage
+            }
+        }
+
+        // Check dark mode preference on page load
+        window.onload = function() {
+            const darkMode = localStorage.getItem('darkMode');
+            if (darkMode === 'enabled') {
+                document.documentElement.setAttribute('data-theme', 'dark');
+                document.body.classList.add('dark-mode');
+                document.querySelector('#toggle').checked = true;
+            }
+        };
+    </script>
+    <script src="script.js"></script>
+</body>
+</html>

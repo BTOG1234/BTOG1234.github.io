@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Amog Game</title>
+    <link rel="stylesheet" type="text/css" href="styles.css">
+    <style>
+        /* CSS for the Amog */
+        #amog {
+            width: 150px;
+            height: 198px;
+            margin: 50px auto; /* Center horizontally */
+        }
+
+        .switch-label {
+            font-size: 14px;
+            margin-top: 5px;
+        }
+
+        /* CSS for Dark Mode */
+        body.dark-mode {
+            background-color: #333;
+            color: #f2f2f2;
+        }
+    </style>
+</head>
+<body>
+    <h1>Amog Game</h1>
+    <div id="amog" role="img" aria-label="Image of a character from the Amog game"></div>
+    <p>This is your Amog. Take care of it!</p>
+    <button class="button" onclick="feedAmog()" aria-label="Feed Amog">Feed Amog</button>
+    <button class="button" onclick="goToMainMenu()" aria-label="Quit Game and Return to Main Menu">Quit Game</button>
+
+    <!-- Dark Mode Toggle -->
+    <label class="switch" id="darkModeToggle">
+        <input type="checkbox" id="toggle" onclick="toggleDarkMode()">
+        <span class="slider round"></span>
+    </label>
+    <span class="switch-label">Dark Mode</span>
+
+    <script>
+        // Variables to track Amog's hunger
+        let hunger = 0;
+        const maxHunger = 15;
+        const hungerDecreaseOnFeed = 10;
+        const hungerIncreaseInterval = 20000; // Increase hunger every 20 seconds
+
+        // Function to increase Amog's hunger
+        function increaseHunger() {
+            hunger++;
+            if (hunger >= maxHunger) {
+                showHungrySprite();
+            }
+        }
+
+        // Function to decrease Amog's hunger when fed
+        function feedAmog() {
+            if (hunger > 0) {
+                hunger = Math.max(0, hunger - hungerDecreaseOnFeed);
+                updateAmogAppearance();
+            }
+        }
+
+        // Function to update Amog's appearance based on hunger
+        function updateAmogAppearance() {
+            if (hunger < maxHunger) {
+                document.getElementById('amog').style.backgroundImage = "url('idle.gif')";
+            } else {
+                showHungrySprite();
+            }
+        }
+
+        // Function to show the hungry sprite
+        function showHungrySprite() {
+            document.getElementById('amog').style.backgroundImage = "url('hungry.gif')";
+        }
+
+        // Function to navigate to main menu
+        function goToMainMenu() {
+            window.location.href = "index.html"; // Navigate to index.html
+        }
+
+        // Function to toggle dark mode
+        function toggleDarkMode() {
+            var toggle = document.getElementById("toggle");
+            if (toggle.checked) {
+                document.body.classList.add("dark-mode");
+                localStorage.setItem("darkMode", "enabled"); // Store dark mode preference
+            } else {
+                document.body.classList.remove("dark-mode");
+                localStorage.setItem("darkMode", "disabled"); // Store dark mode preference
+            }
+        }
+
+        // Check dark mode preference on page load
+        window.onload = function() {
+            var darkMode = localStorage.getItem("darkMode");
+            if (darkMode === "enabled") {
+                document.body.classList.add("dark-mode");
+                document.getElementById("toggle").checked = true;
+            } else {
+                document.body.classList.remove("dark-mode");
+                document.getElementById("toggle").checked = false;
+            }
+
+            // Start interval to increase hunger
+            setInterval(increaseHunger, hungerIncreaseInterval);
+
+            // Initial appearance update
+            updateAmogAppearance();
+        }
+    </script>
+</body>
+</html>
