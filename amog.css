@@ -1,12 +1,11 @@
-/* CSS for the Amog */
 #amog {
     width: 150px;
     height: 198px;
-    background-image: url('idle.gif');
+    background-image: url('docs/assets/idle.gif'); /* Adjust the path */
     background-size: cover;
     margin: 50px auto; /* Center horizontally */
 }
 
 #amog.hungry {
-    background-image: url('hungry.gif');
+    background-image: url('docs/assets/hungry.gif'); /* Adjust the path */
 }
